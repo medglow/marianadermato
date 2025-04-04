@@ -1285,23 +1285,76 @@ Le Monde Offices, Av. das Américas, 3500, Toronto, 334<br> <b>Agendamentos: (21
 	</div>
   </div>
   
-  <script>
-	function fecharAviso() {
-	  document.getElementById('popup-aviso').style.display = 'none';
+  <style>
+	/* Overlay escuro com transparência */
+	#popupOverlay {
+	  display: none;
+	  position: fixed;
+	  top: 0; left: 0;
+	  width: 100%; height: 100%;
+	  background-color: rgba(0, 0, 0, 0.4);
+	  z-index: 9999;
 	}
   
-	window.onload = function() {
-	  setTimeout(function() {
-		document.getElementById('popup-aviso').style.display = 'flex';
-	  }, 5000);
+	/* Janela do popup */
+	#popupBox {
+	  max-width: 90%;
+	  width: 320px;
+	  margin: 100px auto;
+	  background: #fff;
+	  padding: 20px 30px;
+	  border-radius: 10px;
+	  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	  text-align: center;
+	  position: relative;
+	  font-family: inherit;
+	  animation: fadeIn 0.4s ease-in-out;
+	}
   
-	  // fecha o modal clicando fora do conteúdo
-	  document.getElementById('popup-aviso').addEventListener('click', function(e) {
-		if (e.target === this) fecharAviso();
-	  });
+	/* Botão de fechar */
+	.popupClose {
+	  position: absolute;
+	  top: 10px; right: 15px;
+	  font-size: 20px;
+	  color: #999;
+	  cursor: pointer;
+	}
+  
+	/* Animação */
+	@keyframes fadeIn {
+	  from {opacity: 0; transform: translateY(-20px);}
+	  to {opacity: 1; transform: translateY(0);}
+	}
+  </style>
+  
+  <!-- Estrutura do popup -->
+  <div id="popupOverlay">
+	<div id="popupBox">
+	  <span class="popupClose" onclick="closePopup()">×</span>
+	  <h5 style="margin-top: 0;">📢 Atenção!</h5>
+	  <p style="font-size: 15px; line-height: 1.5;">
+		Atendemos somente pacientes particulares.<br>
+		Disponibilizamos <strong>nota fiscal</strong> para reembolso de convênios.
+	  </p>
+	</div>
+  </div>
+  
+  <script>
+	// Exibe após 5s
+	setTimeout(() => {
+	  document.getElementById('popupOverlay').style.display = 'block';
+	}, 5000);
+  
+	// Fecha ao clicar fora
+	document.getElementById('popupOverlay').addEventListener('click', function(e) {
+	  if (e.target === this) closePopup();
+	});
+  
+	function closePopup() {
+	  document.getElementById('popupOverlay').style.display = 'none';
 	}
   </script>
-	
+  
 	</body>
 </html>
 				
